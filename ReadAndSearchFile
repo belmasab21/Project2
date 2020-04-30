@@ -1,0 +1,135 @@
+import java.util.Scanner;
+import java.io.File;
+public class ReadAndSearchFile implements PokemonInfo {
+    public static void main(String[] args) {
+        String path = "Pokedex - Sheet1.csv";
+        readFromFile(path);
+
+        Scanner a = new Scanner(System.in);
+
+        System.out.println("Enter the name of a Pokemon: ");
+        String userInPokemon = a.nextLine();
+        boolean foundPokemon = pokemonSearch(userInPokemon);
+        //speak();
+
+        System.out.println("\nPrint Pokedex or sort by number?");
+        System.out.println("Type 'Pokedex' to print pokedex, type 'Sort' to sort by number");
+        String sortChoice = a.nextLine();
+        if (sortChoice.equalsIgnoreCase("Sort")) {
+            Sort.sortPokedexByName();
+        } 
+        else if (sortChoice.equalsIgnoreCase("Pokedex")) {
+            Sort.sortPokedexByNumber();
+        }
+        else {
+            System.out.println("Error"); 
+            return;
+        }
+
+    }  
+
+    static void readFromFile(String path){
+        File file = new File(path);
+
+        Scanner scanner;
+        try{
+            scanner = new Scanner(file);
+        }catch(Exception e){
+            System.out.println("Error");
+            return;
+        }
+
+        scanner.nextLine();
+        for(int i = 0; i < NUMBER_OF_POKEMON; i++) {
+            String line = scanner.nextLine();
+
+            String[] columns = line.split(",");
+
+            int number = Integer.parseInt(columns[0]);
+            String name = columns[1];
+            String typeA = columns[2];
+            String typeB = columns[3];
+            int atk = Integer.parseInt(columns[4]);
+            int def = Integer.parseInt(columns[5]);
+            int spe = Integer.parseInt(columns[6]);
+            String loc = columns[7];
+            String item = columns[8];
+
+            NUMBERS[i] = number;
+            NAMES[i] = name;
+            TYPE_A[i] = typeA;
+            TYPE_B[i] = typeB;
+            ATTACK[i] = atk;
+            DEFENSE[i] = def;
+            SPEED[i] = spe;
+            LOCATIONS[i] = loc;
+            ITEMS[i] = item;
+        }    
+        scanner.close();
+    }
+
+    static boolean pokemonSearch(String userInPokemon) {
+        Scanner a = new Scanner(System.in);
+
+        for(int i = 0; i < NUMBER_OF_POKEMON; i++){
+            int number = NUMBERS[i];
+
+            String typeA = TYPE_A[i];
+            String typeB = TYPE_B[i];
+            int atk = ATTACK[i];
+            int def = DEFENSE[i];
+            int spe = SPEED[i];
+            String loc = LOCATIONS[i];
+            String item = ITEMS[i];
+
+            if(NAMES[i].equalsIgnoreCase(userInPokemon)) {
+                System.out.printf("(%d) %s [%s, %s Type] ATK: %d, DEF: %d, SPE: %d (%s) Item: %s %n", number, userInPokemon, typeA, typeB, atk, def, spe, loc, item);
+                System.out.println(speak());
+                return true;
+            }  
+            else {
+                i++;  
+            }
+        }
+        return false;
+    }
+
+    
+    static void swap(int index1, int index2) {
+        int tempNumber = NUMBERS[index1];
+        String tempName = NAMES[index1];
+        String tempTypeA = TYPE_A[index1];
+        String tempTypeB = TYPE_B[index1];
+
+        NUMBERS[index1] = NUMBERS[index2];
+        NAMES[index1] = NAMES[index2];
+        TYPE_A[index1] = TYPE_A[index2];    
+        TYPE_B[index1] = TYPE_B[index2];
+
+        NUMBERS[index2] = tempNumber;
+        NAMES[index2] = tempName;
+        TYPE_A[index2] = tempTypeA;
+        TYPE_B[index2] = tempTypeB;
+    }
+
+    public static String speak() {
+        for (int i = 0; i < NUMBER_OF_POKEMON; i++) {
+            if (NAMES[i].equalsIgnoreCase("Magikarp")) {
+                return "FlopFlopFlop";
+            }
+            else if (NAMES[i].equalsIgnoreCase("Squirtle")) {
+                return "SquirtSquirtSquirt";
+            }
+            else if (NAMES[i].equalsIgnoreCase("Pikachu")) {
+                return "PikACHOO #covid19 #staysafe";
+            }
+            else {
+                return "Rawr XD";
+            }
+
+        }
+        return null;
+    }
+
+   
+}
