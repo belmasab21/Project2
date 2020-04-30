@@ -1,0 +1,65 @@
+public class Sort extends ReadAndSearchFile implements PokemonInfo{
+  static void swap(int index1, int index2) {
+        int tempNumber = NUMBERS[index1];
+        String tempName = NAMES[index1];
+        String tempTypeA = TYPE_A[index1];
+        String tempTypeB = TYPE_B[index1];
+
+        NUMBERS[index1] = NUMBERS[index2];
+        NAMES[index1] = NAMES[index2];
+        TYPE_A[index1] = TYPE_A[index2];    
+        TYPE_B[index1] = TYPE_B[index2];
+
+        NUMBERS[index2] = tempNumber;
+        NAMES[index2] = tempName;
+        TYPE_A[index2] = tempTypeA;
+        TYPE_B[index2] = tempTypeB;
+    }
+    
+  static void sortPokedexByName(){                      
+        for(int i=0; i<NUMBER_OF_POKEMON; i++){            
+            for(int j=i+1; j<NUMBER_OF_POKEMON; j++){
+                if(NAMES[i].compareToIgnoreCase(NAMES[j])>0){
+                    String temp;
+                    temp = NAMES[i];
+                    NAMES[i] = NAMES[j];
+                    NAMES[j] = temp;
+                }
+            }
+        }        
+        System.out.println("Pokemon from A to Z:");
+        for(int i = 0; i < NUMBER_OF_POKEMON; i++){
+            int number = NUMBERS[i];
+            String name = NAMES[i];
+            String typeA = TYPE_A[i];
+            String typeB = TYPE_B[i];
+            int atk = ATTACK[i];
+            int def = DEFENSE[i];
+            int spe = SPEED[i];
+            String loc = LOCATIONS[i];
+            String item = ITEMS[i];
+        System.out.printf("(%d) %s %n", number, name);
+        }
+    }
+        
+  static void sortPokedexByNumber() {
+        for (int i = 0; i < NUMBER_OF_POKEMON; i++) {
+            int number = NUMBERS[i];
+            String name = NAMES[i];
+            int atk = ATTACK[i];
+            int def = DEFENSE[i];
+            int spe = SPEED[i];
+            String typeA = TYPE_A[i];
+            String typeB = TYPE_B[i];
+            String loc = LOCATIONS[i];
+            String item = ITEMS[i];
+            System.out.printf("(%d) %s [%s, %s Type] ATK: %d, DEF: %d, SPE: %d (%s) Item: %s %n", number, name, typeA, typeB, atk, def, spe, loc, item);
+        }
+    }
+}
+
+            
+        
+    
+
+
