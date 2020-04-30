@@ -1,0 +1,16 @@
+
+import java.util.Scanner;
+import java.io.File;
+public interface PokemonInfo{        //extends ReadAndSearchFile
+    static final int NUMBER_OF_POKEMON = 151;
+    static final int[] NUMBERS = new int[NUMBER_OF_POKEMON];
+    static final String[] NAMES = new String[NUMBER_OF_POKEMON];
+    static final String[] TYPE_A = new String[NUMBER_OF_POKEMON];
+    static final String[] TYPE_B = new String[NUMBER_OF_POKEMON];
+    static final int[] ATTACK = new int[NUMBER_OF_POKEMON];
+    static final int[] DEFENSE = new int[NUMBER_OF_POKEMON];
+    static final int[] SPEED = new int[NUMBER_OF_POKEMON];
+    static final String[] LOCATIONS = new String[NUMBER_OF_POKEMON];
+    static final String[] ITEMS = new String[NUMBER_OF_POKEMON];
+        
+}
